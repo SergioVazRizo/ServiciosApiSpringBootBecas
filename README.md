@@ -2,7 +2,7 @@
 
 Servicios API Rest hechos con Spring Boot y MySQL
 
-# Istalacion
+# Instalación
 
 - Node Js
 - Spring Tools
