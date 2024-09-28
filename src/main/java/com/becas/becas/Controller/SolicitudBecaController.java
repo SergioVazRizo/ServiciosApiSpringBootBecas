@@ -26,7 +26,7 @@ public class SolicitudBecaController {
         return solicitudBecaService.getSolicitudes();    
     }
 
-    @GetMapping("api/{idSolicitudBeca}")
+    @GetMapping("/{idSolicitudBeca}")
     public SolicitudBeca gSolicitudBecaById(@PathVariable Long idSolicitudBeca){
         return solicitudBecaService.getSolicitudes(idSolicitudBeca).orElse(null);
     }
