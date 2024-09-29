@@ -8,5 +8,6 @@ import com.becas.becas.entity.SolicitudBeca;
 @Repository
 public interface SolicitudBecaRepository extends JpaRepository<SolicitudBeca, Long> {
 
-    
+    boolean existsByBecaBecaIdAndAlumnoId(Long becaId, Long alumnoId);
+
 }

@@ -1,5 +1,6 @@
 package com.becas.becas.Controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.becas.becas.entity.SolicitudBeca;
+import com.becas.becas.repository.SolicitudBecaRepository;
 import com.becas.becas.service.SolicitudBecaService;
 
 @RestController
@@ -23,6 +26,9 @@ public class SolicitudBecaController {
     
     @Autowired
     private SolicitudBecaService solicitudBecaService;
+
+    @Autowired
+    private SolicitudBecaRepository solicitudBecaRepository; // Inyección correcta del repositorio
 
     @GetMapping
     public List<SolicitudBeca> getAllSolicitudBecas(){
@@ -64,4 +70,17 @@ public class SolicitudBecaController {
         return solicitudBeca;
     }
 
+    @GetMapping("/existe")
+    public ResponseEntity<Map<String, Boolean>> existeSolicitud(
+            @RequestParam Long becaId, 
+            @RequestParam Long alumnoId) {
+        
+        // Aquí usas la instancia del repositorio inyectada correctamente
+        boolean existe = solicitudBecaRepository.existsByBecaBecaIdAndAlumnoId(becaId, alumnoId);
+
+        // Devolvemos la respuesta como un JSON
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("registrado", existe);
+        return ResponseEntity.ok(response);
+    }
 }
